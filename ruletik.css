@@ -15,6 +15,7 @@
 }
 
 body {
+    background-color: var(--main-bg-color);
     font-family: "Press Gothic", sans-serif;
     font-size: 0.8333333333333334vw;
     -webkit-user-select: none;
@@ -22,6 +23,12 @@ body {
     -ms-user-select: none;
     user-select: none;
     font-smooth: antialiased;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 4.625em;
+    letter-spacing: -1.2px;
 }
 
 html.lenis {
