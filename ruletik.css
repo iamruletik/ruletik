@@ -1,0 +1,45 @@
+@import url("variables.css");
+
+@font-face {
+    font-family: "Press Gothic";
+    src:
+        url("fonts/press-gothic-pro.otf") format("opentype"),
+        url("fonts/press-gothic-pro-webfont.woff") format("woff"),
+        url("fonts/press-gothic-pro-webfont.woff2") format("woff2");
+    font-weight: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Press Gothic", sans-serif;
+    font-size: 0.8333333333333334vw;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-smooth: antialiased;
+}
+
+html.lenis {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
