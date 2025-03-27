@@ -1,0 +1,33 @@
+{
+  "name": "ruletik-website",
+  "version": "1.0.0",
+  "description": "Home of Alexander Ruletik",
+  "keywords": [
+    "website",
+    "three.js"
+  ],
+  "homepage": "https://github.com/iamruletik/ruletik#readme",
+  "bugs": {
+    "url": "https://github.com/iamruletik/ruletik/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamruletik/ruletik.git"
+  },
+  "license": "ISC",
+  "author": "Alexander Ruletik",
+  "type": "commonjs",
+  "main": "ruletik.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build", 
+    "preview": "vite preview" 
+  },
+  "devDependencies": {
+    "vite": "^6.2.3"
+  },
+  "dependencies": {
+    "gsap": "^3.12.7",
+    "three": "^0.174.0"
+  }
+}
