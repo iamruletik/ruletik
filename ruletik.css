@@ -3,8 +3,8 @@
 @font-face {
     font-family: "Press Gothic";
     src:
-        url("/static/fonts/press-gothic-regular-webfont.woff") format("woff"),
-        url("/static/fonts/press-gothic-regular-webfont.woff2") format("woff2");
+        url("/fonts/press-gothic-regular-webfont.woff") format("woff"),
+        url("/fonts/press-gothic-regular-webfont.woff2") format("woff2");
     font-weight: normal;
 }
 
