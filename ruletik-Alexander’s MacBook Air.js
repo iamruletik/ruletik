@@ -4,9 +4,6 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { TextureUtils } from 'three/src/extras/TextureUtils.js'
 import {Pane} from 'tweakpane'
 
-//Mapper Functuin
-const mapper = gsap.utils.mapRange(0, 1000, 0, 1)
-
 //TweakPane Gui
 const pane = new Pane()
 const paneFolder = pane.addFolder({ 
@@ -47,6 +44,7 @@ video.play();
 
 
 const videoTexture = new THREE.VideoTexture(video)
+TextureUtils.contain(videoTexture, 0.5)
 videoTexture.colorSpace = THREE.SRGBColorSpace
 
 
@@ -58,30 +56,32 @@ videoTexture.minFilter = THREE.NearestFilter
 
 const preloaderEye = {
     geometry: null,
-    material: new THREE.MeshBasicMaterial( { map:videoTexture }),
+    material: new THREE.MeshBasicMaterial( { /* map:videoTexture */ }),
     count: 8,
-    spaceBetween: 0.75,
-    videoWidth: mapper(480),
-    videoHeight: mapper(270)
+    spaceBetween: 1.2,
+    videoWidth: 480,
+    videoHeight: 270
 }
 
 const preloaderEyesArray = new THREE.Group()
+
+console.log(gsap.utils.normalize(0, 10, 0))
 
 const angleDiff = 2 * Math.PI / preloaderEye.count
 
 for (let i = 0; i < preloaderEye.count; i++) {
 
-    preloaderEye.geometry = new THREE.PlaneGeometry(preloaderEye.videoWidth, preloaderEye.videoHeight)
+    preloaderEye.geometry = new THREE.PlaneGeometry(1,1)
     
     let temp = new THREE.Mesh(
         preloaderEye.geometry,
         preloaderEye.material
     )
 
-    temp.position.x = Math.sin(angleDiff * i) * preloaderEye.spaceBetween
-    temp.position.y = Math.cos(angleDiff * i) * preloaderEye.spaceBetween
+    temp.position.x = Math.sin(Math.PI * (1 / (preloaderEye.count * 0.5)) * i) * preloaderEye.spaceBetween
+    temp.position.y = Math.cos(Math.PI * (1 / (preloaderEye.count * 0.5)) * i) * preloaderEye.spaceBetween
 
-    temp.rotateZ(-i*angleDiff)
+    temp.rotateZ(i*angleDiff);
     
 
     preloaderEyesArray.add(temp)
