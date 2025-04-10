@@ -93,7 +93,7 @@ scene.add(preloaderEyesArray)
 
 //Camera Settings
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height) // FOV vertical angle, aspect ratio with/height
-camera.position.set(0,0,3)
+camera.position.set(0,0,2)
 scene.add(camera)
 
 const controls = new OrbitControls(camera, canvas)
