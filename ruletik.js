@@ -56,40 +56,60 @@ videoTexture.colorSpace = THREE.SRGBColorSpace
 
 videoTexture.minFilter = THREE.NearestFilter
 
-const preloaderEye = {
+const preloaderEyes = {
     geometry: null,
     material: new THREE.MeshBasicMaterial( { map:videoTexture }),
-    count: 8,
-    spaceBetween: 0.75,
+    count: [
+        8, 12, 16
+    ],
+    spaceBetween: [
+        0.75, 1.5, 2.5
+    ],
     videoWidth: mapper(480),
-    videoHeight: mapper(270)
+    videoHeight: mapper(270),
+    videoScale: [
+        1, 1.5, 1.75
+    ]
 }
 
-const preloaderEyesArray = new THREE.Group()
+const preloaderEyesGroup = new THREE.Group()
+const eyesCirclesArray = [
+    new THREE.Group(),
+    new THREE.Group(),
+    new THREE.Group()
+]
 
-const angleDiff = 2 * Math.PI / preloaderEye.count
+//First Loop is Circle
+for (let c = 0; c < 3; c++) {
 
-for (let i = 0; i < preloaderEye.count; i++) {
+        const angleDiff = 2 * Math.PI / preloaderEyes.count[c]
 
-    preloaderEye.geometry = new THREE.PlaneGeometry(preloaderEye.videoWidth, preloaderEye.videoHeight)
-    
-    let temp = new THREE.Mesh(
-        preloaderEye.geometry,
-        preloaderEye.material
-    )
+        //Second loop for eyes
+        for (let i = 0; i < preloaderEyes.count[c]; i++) {
 
-    temp.position.x = Math.sin(angleDiff * i) * preloaderEye.spaceBetween
-    temp.position.y = Math.cos(angleDiff * i) * preloaderEye.spaceBetween
+            preloaderEyes.geometry = new THREE.PlaneGeometry(preloaderEyes.videoWidth * preloaderEyes.videoScale[c], preloaderEyes.videoHeight * preloaderEyes.videoScale[c])
+            
+            let temp = new THREE.Mesh(
+                preloaderEyes.geometry,
+                preloaderEyes.material
+            )
 
-    temp.rotateZ(-i*angleDiff)
-    
+            temp.position.x = Math.sin(angleDiff * i) * preloaderEyes.spaceBetween[c]
+            temp.position.y = Math.cos(angleDiff * i) * preloaderEyes.spaceBetween[c]
 
-    preloaderEyesArray.add(temp)
+            temp.rotateZ(-i*angleDiff)
+            
 
+            eyesCirclesArray[c].add(temp)
+
+        }
+
+        preloaderEyesGroup.add(eyesCirclesArray[c])
 }
 
+scene.add(preloaderEyesGroup)
 
-scene.add(preloaderEyesArray)
+
 
 //Camera Settings
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height) // FOV vertical angle, aspect ratio with/height
@@ -123,7 +143,9 @@ const tick = () => {
 
     const elapsedTime = clock.getElapsedTime() //Built in function in seconds since start
 
-    preloaderEyesArray.rotation.z += 0.001   
+    eyesCirclesArray[0].rotation.z += 0.001   
+    eyesCirclesArray[1].rotation.z -= 0.001   
+    eyesCirclesArray[2].rotation.z += 0.001   
 
     camera.lookAt(new THREE.Vector3()) //Empty Vector3 method resul in 0 0 0  Vector, basically center of the scene
 
