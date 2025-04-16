@@ -4,6 +4,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { TextureUtils } from 'three/src/extras/TextureUtils.js'
 import {Pane} from 'tweakpane'
 
+console.log(document.fonts.status)
+
 //Mapper Function
 const mapper = gsap.utils.mapRange(0, 1000, 0, 1)
 
@@ -27,7 +29,7 @@ const renderer = new THREE.WebGLRenderer({
                                             })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio,2))//Setting pixel ratio 
-renderer.setClearColor(0xD3CCBF) //Instad of black background
+renderer.setClearColor(0xD3CCBF) //Instead of black background
 
 //Texture Loader
 const textureLoader = new THREE.TextureLoader()
@@ -38,40 +40,37 @@ const scene = new THREE.Scene()
 //Preloader Eyes
 
 //Video Texture
-const video = document.createElement('video')
-video.setAttribute('src', 'eyeTexture.mp4')
-video.muted = true
-video.playsInline = true
-video.loop = true
-video.play();
+const preloaderVideoTexture = document.createElement('video')
+preloaderVideoTexture.setAttribute('src', 'eyeTexture.mp4')
+preloaderVideoTexture.muted = true
+preloaderVideoTexture.playsInline = true
+preloaderVideoTexture.loop = true
+//preloaderVideoTexture.play();
+
+
 
 //Check if browser tab was not active
 document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
-        video.pause()
-        console.log(video.paused)
+        preloaderVideoTexture.pause()
+        console.log('Left Tab')
     } else {
-        video.play()
-        console.log(video.paused)
+        preloaderVideoTexture.play()
+        console.log('Returned to the Tab')
 
     }
-  });
+})
 
 
-const videoTexture = new THREE.VideoTexture(video)
+
+const videoTexture = new THREE.VideoTexture(preloaderVideoTexture)
 videoTexture.colorSpace = THREE.SRGBColorSpace
-
-
-
-
-//videoTexture.wrapS = THREE.RepeatWrapping
-//videoTexture.wrapT = THREE.RepeatWrapping
 
 videoTexture.minFilter = THREE.NearestFilter
 
 const preloaderEyes = {
     geometry: null,
-    material: new THREE.MeshBasicMaterial( { map:videoTexture }),
+    material: new THREE.MeshBasicMaterial( { map:videoTexture, transparent: true }),
     count: [
         8, 12, 16
     ],
@@ -167,7 +166,6 @@ const tick = () => {
     controls.update()
 }
 tick()
-
 
 
 //Resize Function
