@@ -41,7 +41,6 @@ h1 {
     line-height: 0.9;
     text-align: center;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align
     pointer-events: none;
 }

@@ -4,7 +4,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { TextureUtils } from 'three/src/extras/TextureUtils.js'
 import {Pane} from 'tweakpane'
 
-//Mapper Functuin
+//Mapper Function
 const mapper = gsap.utils.mapRange(0, 1000, 0, 1)
 
 //TweakPane Gui
@@ -45,9 +45,22 @@ video.playsInline = true
 video.loop = true
 video.play();
 
+//Check if browser tab was not active
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+        video.pause()
+        console.log(video.paused)
+    } else {
+        video.play()
+        console.log(video.paused)
+
+    }
+  });
+
 
 const videoTexture = new THREE.VideoTexture(video)
 videoTexture.colorSpace = THREE.SRGBColorSpace
+
 
 
 
@@ -118,9 +131,6 @@ scene.add(camera)
 
 const controls = new OrbitControls(camera, canvas)
 
-
-
-//My Scene
 
 
 
