@@ -45,7 +45,7 @@ preloaderVideoTexture.setAttribute('src', 'eyeTexture.mp4')
 preloaderVideoTexture.muted = true
 preloaderVideoTexture.playsInline = true
 preloaderVideoTexture.loop = true
-//preloaderVideoTexture.play();
+//preloaderVideoTexture.play()
 
 
 
