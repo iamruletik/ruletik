@@ -39,49 +39,29 @@ const scene = new THREE.Scene()
 
 //Preloader Eyes
 
-//Video Texture
-const preloaderVideoTexture = document.createElement('video')
-preloaderVideoTexture.setAttribute('src', 'eyeTexture.mp4')
-preloaderVideoTexture.muted = true
-preloaderVideoTexture.playsInline = true
-preloaderVideoTexture.loop = true
-//preloaderVideoTexture.play()
+//Sprite Texture
+const eyeTexture = textureLoader.load('eyeSpriteCompressed.webp')
+eyeTexture.colorSpace = THREE.SRGBColorSpace
+eyeTexture.minFilter = THREE.NearestFilter
 
-
-
-//Check if browser tab was not active
-document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-        preloaderVideoTexture.pause()
-        console.log('Left Tab')
-    } else {
-        preloaderVideoTexture.play()
-        console.log('Returned to the Tab')
-
-    }
-})
-
-
-
-const videoTexture = new THREE.VideoTexture(preloaderVideoTexture)
-videoTexture.colorSpace = THREE.SRGBColorSpace
-
-videoTexture.minFilter = THREE.NearestFilter
 
 const preloaderEyes = {
-    geometry: null,
-    material: new THREE.MeshBasicMaterial( { map:videoTexture, transparent: true }),
+    material: new THREE.SpriteMaterial( { map: eyeTexture } ),
     count: [
         8, 12, 16
     ],
     spaceBetween: [
         0.75, 1.5, 2.5
     ],
-    videoWidth: mapper(480),
-    videoHeight: mapper(270),
-    videoScale: [
+    circlesScale: [
         1, 1.5, 1.75
-    ]
+    ],
+    tilesCountX: 9,
+    tilesCountY: 15,
+    currentTile: 58,
+    scaleX: mapper(480),
+    scaleY: mapper(270),
+
 }
 
 const preloaderEyesGroup = new THREE.Group()
@@ -95,16 +75,19 @@ const eyesCirclesArray = [
 for (let c = 0; c < 3; c++) {
 
         const angleDiff = 2 * Math.PI / preloaderEyes.count[c]
+        
+        const offsetX = (preloaderEyes.currentTile % preloaderEyes.tilesCountX) / preloaderEyes.tilesCountX
+        const offsetY = (preloaderEyes.tilesCountY - Math.floor(preloaderEyes.currentTile / preloaderEyes.tilesCountX) - 1) / preloaderEyes.tilesCountY
+        
+        eyeTexture.repeat.set(1 / preloaderEyes.tilesCountX, 1 / preloaderEyes.tilesCountY)
+        eyeTexture.offset.x = offsetX
+        eyeTexture.offset.y = offsetY
 
         //Second loop for eyes
         for (let i = 0; i < preloaderEyes.count[c]; i++) {
-
-            preloaderEyes.geometry = new THREE.PlaneGeometry(preloaderEyes.videoWidth * preloaderEyes.videoScale[c], preloaderEyes.videoHeight * preloaderEyes.videoScale[c])
             
-            let temp = new THREE.Mesh(
-                preloaderEyes.geometry,
-                preloaderEyes.material
-            )
+            let temp = new THREE.Sprite( preloaderEyes.material )
+            temp.scale.set(preloaderEyes.scaleX, preloaderEyes.scaleY, 1)
 
             temp.position.x = Math.sin(angleDiff * i) * preloaderEyes.spaceBetween[c]
             temp.position.y = Math.cos(angleDiff * i) * preloaderEyes.spaceBetween[c]
@@ -121,6 +104,15 @@ for (let c = 0; c < 3; c++) {
 
 scene.add(preloaderEyesGroup)
 
+
+//Check if browser tab was not active
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+        console.log('Left Tab')
+    } else {
+        console.log('Returned to the Tab')
+    }
+})
 
 
 //Camera Settings
