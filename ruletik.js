@@ -57,7 +57,7 @@ const preloaderEyes = {
     ],
     tilesCountX: 9,
     tilesCountY: 15,
-    currentTile: 58,
+    currentTile: 1,
     width: mapper(480),
     height: mapper(270),
     scale: [
@@ -94,7 +94,7 @@ for (let c = 0; c < 3; c++) {
 
             let temp = new THREE.Mesh(
                 preloaderEyes.geometry,
-                new THREE.MeshBasicMaterial( { map: preloaderTexture.clone(), transparent: true })
+                new THREE.MeshBasicMaterial( { map: preloaderTexture, transparent: true })
             )
 
             temp.position.x = Math.sin(angleDiff * i) * preloaderEyes.spaceBetween[c]
@@ -125,8 +125,21 @@ const controls = new OrbitControls(camera, canvas)
 
 
 
-let currentTile = 0
+let spriteObj = { currentTile: 0 }
 let step = 1
+
+
+gsap.fromTo(spriteObj, {
+    currentTile: 0,
+}, {
+    currentTile: 134,
+    yoyo: true,
+    repeat: -1,
+    ease: "steps(134)",
+    duration: 5
+})
+
+
 
 //Animation Loop Function
 const tick = () => {
@@ -136,24 +149,14 @@ const tick = () => {
     eyesCirclesArray[0].rotation.z += 0.001   
     eyesCirclesArray[1].rotation.z -= 0.001   
     eyesCirclesArray[2].rotation.z += 0.001   
-
-
-
-    if (currentTile >= 58) {
-        step = -1
-    } else if (currentTile <= 0) {
-        step = 1
-    }
-
-    currentTile += step
     
         
-    let offsetX = (currentTile % preloaderEyes.tilesCountX) / preloaderEyes.tilesCountX
-    let offsetY = (preloaderEyes.tilesCountY - Math.floor(currentTile / preloaderEyes.tilesCountX) - 1) / preloaderEyes.tilesCountY
+    let offsetX = (spriteObj.currentTile % preloaderEyes.tilesCountX) / preloaderEyes.tilesCountX
+    let offsetY = (preloaderEyes.tilesCountY - Math.floor(spriteObj.currentTile / preloaderEyes.tilesCountX) - 1) / preloaderEyes.tilesCountY
+    console.log(spriteObj.currentTile)
 
-
-    preloaderEyesGroup.children[0].children[0].material.map.offset.x = offsetX
-    preloaderEyesGroup.children[0].children[0].material.map.offset.y = offsetY
+    preloaderTexture.offset.x = offsetX
+    preloaderTexture.offset.y = offsetY
 
 
     camera.lookAt(new THREE.Vector3()) //Empty Vector3 method resul in 0 0 0  Vector, basically center of the scene
