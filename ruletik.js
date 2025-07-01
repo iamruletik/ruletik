@@ -1,9 +1,9 @@
 import * as THREE from 'three'
 import gsap from 'gsap'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
-import { TextureUtils } from 'three/src/extras/TextureUtils.js'
-import {Pane} from 'tweakpane'
-import { texture, textureLoad } from 'three/tsl'
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader'
+import { Pane } from 'tweakpane'
+
 
 console.log(document.fonts.status)
 
@@ -37,6 +37,16 @@ const textureLoader = new THREE.TextureLoader()
 
 //Scene
 const scene = new THREE.Scene()
+
+
+const gltfLoader = new GLTFLoader()
+
+gltfLoader.load('alexander-ruletik.glb', gltf => {
+    console.log(gltf)
+    scene.add(gltf.scene)
+})
+
+
 
 //Preloader Eyes
 
@@ -119,12 +129,6 @@ scene.add(camera)
 
 const controls = new OrbitControls(camera, canvas)
 
-
-
-
-
-
-
 let spriteObj = { currentTile: 0 }
 let step = 1
 
@@ -132,10 +136,10 @@ let step = 1
 gsap.fromTo(spriteObj, {
     currentTile: 0,
 }, {
-    currentTile: 134,
+    currentTile: 133,
     yoyo: true,
     repeat: -1,
-    ease: "steps(134)",
+    ease: "steps(133)",
     duration: 5
 })
 
@@ -146,14 +150,14 @@ const tick = () => {
 
     const elapsedTime = clock.getElapsedTime() //Built in function in seconds since start
 
-    eyesCirclesArray[0].rotation.z += 0.001   
-    eyesCirclesArray[1].rotation.z -= 0.001   
-    eyesCirclesArray[2].rotation.z += 0.001   
+    eyesCirclesArray[0].rotation.z += 0.0015
+    eyesCirclesArray[1].rotation.z -= 0.001
+    eyesCirclesArray[2].rotation.z += 0.0005
     
         
     let offsetX = (spriteObj.currentTile % preloaderEyes.tilesCountX) / preloaderEyes.tilesCountX
     let offsetY = (preloaderEyes.tilesCountY - Math.floor(spriteObj.currentTile / preloaderEyes.tilesCountX) - 1) / preloaderEyes.tilesCountY
-    console.log(spriteObj.currentTile)
+    //console.log(spriteObj.currentTile)
 
     preloaderTexture.offset.x = offsetX
     preloaderTexture.offset.y = offsetY
@@ -194,6 +198,6 @@ window.addEventListener('resize', () => {
     camera.aspect = sizes.width / sizes.height;
     camera.updateProjectionMatrix() // Update Camera
 
-    renderer.setSize(sizes.width, sizes.height) //Update Renderer - Better put here so user when moving windows from screen to screen would recieve better expirience
+    renderer.setSize(sizes.width, sizes.height) //Update Renderer - Better put here so user when moving windows from screen to screen would receive better experience
 
 })
