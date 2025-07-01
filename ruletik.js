@@ -29,7 +29,8 @@ const renderer = new THREE.WebGLRenderer({
                                                 canvas: canvas
                                             })
 renderer.setSize(sizes.width, sizes.height)
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2))//Setting pixel ratio 
+//renderer.setPixelRatio(Math.min(window.devicePixelRatio,2))//Setting pixel ratio
+renderer.setPixelRatio(2)//Setting pixel ratio
 renderer.setClearColor(0xD5CDC0) //Instead of black background
 
 //Texture Loader
@@ -71,7 +72,7 @@ const preloaderEyes = {
     width: mapper(480),
     height: mapper(270),
     scale: [
-        1, 1.5, 1.75
+        1, 1.5, 2.25
     ]
 }
 
@@ -141,6 +142,19 @@ gsap.fromTo(spriteObj, {
     repeat: -1,
     ease: "steps(133)",
     duration: 5
+})
+
+
+document.addEventListener('DOMContentLoaded', e => {
+
+    setTimeout(() => {
+        gsap.to(camera.position, {
+            z: 0.4,
+            duration: 2,
+            ease: "power4.inOut",
+        })
+    }, 1000)
+
 })
 
 
