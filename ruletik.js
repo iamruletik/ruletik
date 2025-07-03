@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', e => {
             duration: 2,
             ease: "power4.inOut",
         })
-    }, 1000)
+    }, 1100)
 
 })
 
