@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bb3101a-1937-4636-aea2-3e828389f86a" name="Changes" comment="New Files">
+    <list default="true" id="2bb3101a-1937-4636-aea2-3e828389f86a" name="Changes" comment="Animation for Letters">
+      <change afterPath="$PROJECT_DIR$/src/preloader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ruletik.js" beforeDir="false" afterPath="$PROJECT_DIR$/ruletik.js" afterDir="false" />
     </list>
@@ -12,6 +13,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -59,7 +67,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "notes": "ЗАБИТЬ НА ГЛАЗА, ДЕЛАТЬ ДАЛЬШЕ\n\nРеализовать анимацию скейла до букв внутри tick  функции:\n1.Как только сайт прогрузился показываем 1 луп глаз\n2. В тик функции как только прошёл луп глаз 1 раз даём анимацию до букв\n3. Скрываем глаза включаем скрол\n4. Показываем элементы на странице\n\n",
+    "notes": "ЗАБИТЬ НА ГЛАЗА, ДЕЛАТЬ ДАЛЬШЕ\n\nРеализовать анимацию скейла до букв внутри tick  функции:\n1.Как только сайт прогрузился показываем 1 луп глаз\n2. В тик функции как только прошёл луп глаз 1 раз даём анимацию до букв\n3. Скрываем глаза включаем скрол\n4. Показываем элементы на странице\n\n\nПопробовать вынести функционал связанный с прелоадером в отдельный js файл и посмотреть как вит соберёт всё воедино\n",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
@@ -88,7 +96,7 @@
       <workItem from="1750861370810" duration="80000" />
       <workItem from="1750861458150" duration="1918000" />
       <workItem from="1751337598138" duration="137000" />
-      <workItem from="1751337741345" duration="3605000" />
+      <workItem from="1751337741345" duration="16932000" />
     </task>
     <task id="LOCAL-00001" summary="Created GLTF version of Headline">
       <option name="closed" value="true" />
@@ -106,7 +114,31 @@
       <option name="project" value="LOCAL" />
       <updated>1751339209821</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Animation for Letters">
+      <option name="closed" value="true" />
+      <created>1751556529706</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1751556529706</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Animation for Letters">
+      <option name="closed" value="true" />
+      <created>1751556571324</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1751556571324</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Animation for Letters">
+      <option name="closed" value="true" />
+      <created>1751556625211</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1751556625211</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -129,6 +161,7 @@
     </ignored-roots>
     <MESSAGE value="Created GLTF version of Headline" />
     <MESSAGE value="New Files" />
-    <option name="LAST_COMMIT_MESSAGE" value="New Files" />
+    <MESSAGE value="Animation for Letters" />
+    <option name="LAST_COMMIT_MESSAGE" value="Animation for Letters" />
   </component>
 </project>
